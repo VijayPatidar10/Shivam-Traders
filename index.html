@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivam Traders, Sarangpur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-page .shop-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #e94560;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .welcome-page .tagline {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+
+        .welcome-page .owner-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid #e94560;
+            object-fit: cover;
+            object-position: 40% 35%;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(233, 69, 96, 0.4);
+        }
+
+        .welcome-page .owner-name {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .welcome-page .welcome-text {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #f9d423, #ff4e50, #f9d423);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shine 3s linear infinite, float 3s ease-in-out infinite;
+            text-shadow: none;
+            filter: drop-shadow(0 0 10px rgba(249, 212, 35, 0.3));
+            font-family: 'Noto Sans Devanagari', 'Segoe UI', sans-serif;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .welcome-page .location {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .enter-btn {
+            background: linear-gradient(135deg, #e94560, #c23152);
+            color: #fff;
+            border: none;
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(233, 69, 96, 0.4);
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(233, 69, 96, 0.6);
+        }
+
+        /* Catalog Page */
+        .catalog-page {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .catalog-header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .catalog-header h1 {
+            font-size: 1.8rem;
+            color: #e94560;
+            margin-bottom: 5px;
+        }
+
+        .catalog-header p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .back-btn {
+            background: rgba(233, 69, 96, 0.2);
+            border: 1px solid #e94560;
+            color: #e94560;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #e94560;
+            color: #fff;
+        }
+
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            background: rgba(233, 69, 96, 0.2);
+            border-color: #e94560;
+        }
+
+        .category-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .category-card .name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .category-card .count {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Product Listing */
+        .product-listing {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .product-listing .category-title {
+            font-size: 1.5rem;
+            color: #e94560;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .product-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: #e94560;
+            transform: translateY(-3px);
+        }
+
+        .product-card .product-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .product-card .product-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .product-card .product-desc {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 12px;
+        }
+
+        .product-card .product-price {
+            font-size: 1.1rem;
+            color: #4ecca3;
+            font-weight: 700;
+        }
+
+        .product-card .product-price span {
+            font-size: 0.8rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        /* QR Section */
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .qr-section h3 {
+            color: #e94560;
+            margin-bottom: 15px;
+        }
+
+        .qr-section #qrcode {
+            display: inline-block;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .qr-section p {
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 30px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e94560;
+            border-radius: 3px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .welcome-page .shop-name {
+                font-size: 1.8rem;
+            }
+            .welcome-page .welcome-text {
+                font-size: 1.3rem;
+            }
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Welcome Page -->
+    <div class="welcome-page" id="welcomePage">
+        <div class="shop-name">SHIVAM TRADERS</div>
+        <div class="tagline">Sarangpur | Since 2026</div>
+        <img src="owner.jpg" alt="Owner" class="owner-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2235%22 r=%2225%22 fill=%22%23e94560%22/><ellipse cx=%2250%22 cy=%2285%22 rx=%2235%22 ry=%2225%22 fill=%22%23e94560%22/></svg>'">
+        <div class="owner-name">Shivam Patidar</div>
+        <div class="welcome-text">🙏 शिवम ट्रेडर्स आपका स्वागत करता है 🙏</div>
+        <div class="location">📍 Akodiya Road, Mandi Ke Paas, Sarangpur</div>
+        <button class="enter-btn" onclick="showCatalog()">🛒 Dekhein Products</button>
+
+        <div class="qr-section">
+            <h3>Scan QR Code</h3>
+            <div id="qrcode"></div>
+            <p>QR scan karein aur catalog dekhein</p>
+        </div>
+    </div>
+
+    <!-- Catalog Page -->
+    <div class="catalog-page" id="catalogPage">
+        <button class="back-btn" onclick="showWelcome()">← Welcome Page</button>
+        <div class="catalog-header">
+            <h1>🛒 Shivam Traders</h1>
+            <p>Select a category to view products</p>
+        </div>
+        <div class="categories-grid" id="categoriesGrid"></div>
+    </div>
+
+    <!-- Product Listing Page -->
+    <div class="product-listing" id="productListing">
+        <button class="back-btn" onclick="showCatalog()">← Categories</button>
+        <div class="category-title" id="categoryTitle"></div>
+        <div class="products-grid" id="productsGrid"></div>
+    </div>
+
+    <div class="footer">
+        © 2026 Shivam Traders, Sarangpur | All Rights Reserved
+    </div>
+
+    <script>
+        // Product Data
+        const categories = [
+            {
+                name: "Nal (Taps)",
+                icon: "🚰",
+                count: "12+ Products",
+                products: [
+                    { name: "Brass Pillar Tap", desc: "Premium quality brass tap, long lasting finish", price: "₹280", icon: "🚰" },
+                    { name: "SS Health Faucet", desc: "Stainless steel health faucet with holder", price: "₹180", icon: "🚿" },
+                    { name: "Angle Cock 1/4", desc: "Chrome plated angle cock, 1/4 inch", price: "₹85", icon: "🔧" },
+                    { name: "CP Angle Valve", desc: "Chrome plated angle valve for wash basin", price: "₹120", icon: "⚙️" },
+                    { name: "Brass Bib Cock", desc: "Heavy brass bib cock for outdoor use", price: "₹150", icon: "🚰" },
+                    { name: "SS Sink Mixer", desc: "Stainless steel sink mixer with swivel spout", price: "₹650", icon: "🚿" },
+                    { name: "Single Lever Tap", desc: "Modern single lever basin mixer", price: "₹450", icon: "🚰" },
+                    { name: "Wall Mixer Set", desc: "Complete wall mixer set with spout", price: "₹890", icon: "⚙️" },
+                    { name: "PVC Tap Adapter", desc: "Quick connect PVC tap adapter", price: "₹45", icon: "🔧" },
+                    { name: "Garden Tap", desc: "Heavy duty garden tap with hose connector", price: "₹220", icon: "🌿" },
+                    { name: "Sensor Tap", desc: "Automatic sensor tap, water saving", price: "₹1850", icon: "🤖" },
+                    { name: "Swing Tap", desc: "Brass swing tap for kitchen sink", price: "₹320", icon: "🚰" }
+                ]
+            },
+            {
+                name: "Wash Basins",
+                icon: "🚻",
+                count: "8+ Products",
+                products: [
+                    { name: "Table Top Basin", desc: "Premium ceramic table top wash basin", price: "₹850", icon: "🚻" },
+                    { name: "Pedestal Basin", desc: "Floor mounted pedestal wash basin", price: "₹1200", icon: "🚻" },
+                    { name: "Wall Hung Basin", desc: "Space saving wall mounted basin", price: "₹650", icon: "🚻" },
+                    { name: "Semi Pedestal", desc: "Semi pedestal basin with hidden plumbing", price: "₹950", icon: "🚻" },
+                    { name: "Corner Basin", desc: "Compact corner wash basin", price: "₹550", icon: "🚻" },
+                    { name: "Counter Basin", desc: "Under counter wash basin", price: "₹780", icon: "🚻" },
+                    { name: "Kids Basin", desc: "Small size basin for children", price: "₹420", icon: "👶" },
+                    { name: "Stone Basin", desc: "Natural stone finish basin", price: "₹1500", icon: "🪨" }
+                ]
+            },
+            {
+                name: "Water Tanks",
+                icon: "🛢️",
+                count: "6+ Products",
+                products: [
+                    { name: "500 Ltr Tank", desc: "Samsung/Plasto 500 litre water tank", price: "₹3800", icon: "🛢️" },
+                    { name: "1000 Ltr Tank", desc: "1000 litre premium water storage tank", price: "₹6500", icon: "🛢️" },
+                    { name: "500 Ltr Sintex", desc: "Sintex 500 litre black tank", price: "₹4200", icon: "🛢️" },
+                    { name: "Underground Tank", desc: "2000 litre underground water tank", price: "₹12000", icon: "🏗️" },
+                    { name: "Loft Tank", desc: "100 litre compact loft tank", price: "₹850", icon: "🛢️" },
+                    { name: "Overhead Tank", desc: "1500 litre overhead tank with lid", price: "₹8500", icon: "🛢️" }
+                ]
+            },
+            {
+                name: "Sinks",
+                icon: "🍽️",
+                count: "7+ Products",
+                products: [
+                    { name: "SS Single Bowl", desc: "Stainless steel single bowl kitchen sink", price: "₹950", icon: "🍽️" },
+                    { name: "SS Double Bowl", desc: "Double bowl stainless steel sink", price: "₹1650", icon: "🍽️" },
+                    { name: "Granite Sink", desc: "Black granite composite sink", price: "₹2800", icon: "🪨" },
+                    { name: "Sink with Drainboard", desc: "Sink with attached drainboard", price: "₹1950", icon: "🍽️" },
+                    { name: "Small Bar Sink", desc: "Compact bar/prep sink", price: "₹650", icon: "🍽️" },
+                    { name: "SS Sink Grid", desc: "Stainless steel sink protector grid", price: "₹180", icon: "🔲" },
+                    { name: "Sink Mixer Tap", desc: "Dual handle sink mixer with pull-out", price: "₹1200", icon: "🚿" }
+                ]
+            },
+            {
+                name: "Pipes & Fittings",
+                icon: "🔧",
+                count: "10+ Products",
+                products: [
+                    { name: "CPVC Pipe 1/2\"", desc: "CPVC pipe half inch for hot/cold water", price: "₹45/mtr", icon: "🔧" },
+                    { name: "CPVC Pipe 3/4\"", desc: "CPVC pipe 3/4 inch heavy duty", price: "₹65/mtr", icon: "🔧" },
+                    { name: "PVC Pipe 1\"", desc: "PVC pressure pipe 1 inch", price: "₹55/mtr", icon: "🔧" },
+                    { name: "SWR Pipe", desc: "Soil, Waste, Rainwater pipe 4 inch", price: "₹120/mtr", icon: "🔧" },
+                    { name: "CPVC Elbow", desc: "CPVC elbow joint half inch", price: "₹12", icon: "🔗" },
+                    { name: "CPVC Tee", desc: "CPVC tee joint half inch", price: "₹18", icon: "🔗" },
+                    { name: "PVC Cement", desc: "PVC solvent cement 100ml", price: "₹65", icon: "🧴" },
+                    { name: "Teflon Tape", desc: "Thread seal tape 12mm x 10m", price: "₹15", icon: "📋" },
+                    { name: "Flex Pipe", desc: "Stainless steel flex pipe 60cm", price: "₹120", icon: "🔧" },
+                    { name: "Pipe Clamps", desc: "GI pipe clamps assorted pack", price: "₹35", icon: "🔩" }
+                ]
+            },
+            {
+                name: "Fittings & Accessories",
+                icon: "⚙️",
+                count: "9+ Products",
+                products: [
+                    { name: "Floor Trap", desc: "SS floor trap with grating", price: "₹85", icon: "🔲" },
+                    { name: "Nahani Trap", desc: "Cast iron nahani trap 4 inch", price: "₹150", icon: "🔲" },
+                    { name: "Brass Union", desc: "Brass union joint 1/2 inch", price: "₹45", icon: "🔗" },
+                    { name: "Check Valve", desc: "Brass check valve 1 inch", price: "₹280", icon: "⚙️" },
+                    { name: "Gate Valve", desc: "Brass gate valve 1/2 inch", price: "₹220", icon: "⚙️" },
+                    { name: "Ball Valve", desc: "SS ball valve 1/2 inch", price: "₹160", icon: "⚙️" },
+                    { name: "Water Meter", desc: "Domestic water meter 1/2 inch", price: "₹450", icon: "📊" },
+                    { name: "Float Valve", desc: "Automatic float valve for tank", price: "₹180", icon: "🔄" },
+                    { name: "Self Closing Tap", desc: "Self closing push type tap", price: "₹350", icon: "🚰" }
+                ]
+            }
+        ];
+
+        // Generate QR Code
+        function generateQR() {
+            const url = window.location.href;
+            new QRCode(document.getElementById("qrcode"), {
+                text: url,
+                width: 150,
+                height: 150,
+                colorDark: "#1a1a2e",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        // Show Catalog
+        function showCatalog() {
+            document.getElementById('welcomePage').style.display = 'none';
+            document.getElementById('catalogPage').style.display = 'block';
+            document.getElementById('productListing').style.display = 'none';
+            renderCategories();
+            window.scrollTo(0, 0);
+        }
+
+        // Show Welcome
+        function showWelcome() {
+            document.getElementById('welcomePage').style.display = 'flex';
+            document.getElementById('catalogPage').style.display = 'none';
+            document.getElementById('productListing').style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        // Show Products
+        function showProducts(index) {
+            document.getElementById('welcomePage').style.display = 'none';
+            document.getElementById('catalogPage').style.display = 'none';
+            document.getElementById('productListing').style.display = 'block';
+            const cat = categories[index];
+            document.getElementById('categoryTitle').textContent = cat.icon + ' ' + cat.name;
+            renderProducts(cat.products);
+            window.scrollTo(0, 0);
+        }
+
+        // Render Categories
+        function renderCategories() {
+            const grid = document.getElementById('categoriesGrid');
+            grid.innerHTML = '';
+            categories.forEach((cat, index) => {
+                const card = document.createElement('div');
+                card.className = 'category-card';
+                card.onclick = () => showProducts(index);
+                card.innerHTML = `
+                    <div class="icon">${cat.icon}</div>
+                    <div class="name">${cat.name}</div>
+                    <div class="count">${cat.count}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Render Products
+        function renderProducts(products) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-icon">${product.icon}</div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-desc">${product.desc}</div>
+                    <div class="product-price">${product.price} <span>/ piece</span></div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialize
+        window.onload = function() {
+            generateQR();
+        };
+    </script>
+</body>
+</html>
