@@ -359,173 +359,200 @@
 
         /* Share Section */
         .share-section {
-            text-align: center;
-            padding: 30px 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 15px;
             margin-top: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .share-section h3 {
-            color: #e94560;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .share-btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .share-option-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 12px;
-            font-size: 0.95rem;
+        .share-main-btn {
+            width: 100%;
+            padding: 16px 30px;
+            background: rgba(255,255,255,0.05);
+            border: 1px dashed rgba(233, 69, 96, 0.5);
+            border-radius: 15px;
+            color: #fff;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: rgba(255,255,255,0.05);
-            color: #fff;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             backdrop-filter: blur(5px);
         }
 
-        .share-option-btn.qr-share {
-            border-color: rgba(102, 126, 234, 0.4);
+        .share-main-btn:hover {
+            background: rgba(233, 69, 96, 0.1);
+            border-color: #e94560;
+            transform: translateY(-2px);
         }
 
-        .share-option-btn.qr-share:hover {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
-            border-color: #667eea;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        .share-main-btn .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ecca3;
+            border-radius: 50%;
+            animation: pulseDot 1.5s infinite;
         }
 
-        .share-option-btn.link-share {
-            border-color: rgba(240, 147, 251, 0.4);
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
         }
 
-        .share-option-btn.link-share:hover {
-            background: linear-gradient(135deg, rgba(240, 147, 251, 0.3), rgba(245, 87, 108, 0.3));
-            border-color: #f093fb;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
-        }
-
-        .share-option-btn .icon {
-            font-size: 1.1rem;
-        }
-
-        /* Modal */
-        .modal-overlay {
+        /* Bottom Sheet Modal */
+        .bottom-sheet-overlay {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.7);
             z-index: 1000;
-            justify-content: center;
-            align-items: center;
             backdrop-filter: blur(5px);
         }
 
-        .modal-overlay.active {
-            display: flex;
+        .bottom-sheet-overlay.active {
+            display: block;
         }
 
-        .modal {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 350px;
-            width: 90%;
+        .bottom-sheet {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f3460 100%);
+            border-radius: 25px 25px 0 0;
+            z-index: 1001;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .bottom-sheet.active {
+            bottom: 0;
+        }
+
+        .bottom-sheet-handle {
+            width: 40px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            margin: 15px auto;
+        }
+
+        .bottom-sheet-content {
+            padding: 10px 25px 30px;
             text-align: center;
-            border: 1px solid rgba(233, 69, 96, 0.3);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            animation: modalSlide 0.3s ease;
         }
 
-        @keyframes modalSlide {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal h3 {
-            color: #e94560;
-            margin-bottom: 20px;
+        .bottom-sheet-title {
             font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
         }
 
-        .modal-qr {
+        .bottom-sheet-qr {
             background: #fff;
             padding: 15px;
-            border-radius: 15px;
+            border-radius: 20px;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .modal-actions {
+        .bottom-sheet-actions {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .modal-action-btn {
+        .sheet-action-btn {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 14px 20px;
+            gap: 15px;
+            padding: 16px 20px;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-        }
-
-        .modal-action-btn:hover {
-            transform: scale(1.02);
-        }
-
-        .modal-action-btn.download {
-            background: linear-gradient(135deg, #4ecca3, #38b2ac);
             color: #fff;
         }
 
-        .modal-action-btn.share-qr {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: #fff;
+        .sheet-action-btn .btn-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
-        .modal-action-btn.share-link {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            color: #fff;
+        .sheet-action-btn .btn-text {
+            text-align: left;
         }
 
-        .modal-action-btn.copy-link {
-            background: linear-gradient(135deg, #ffd93d, #ff6b35);
+        .sheet-action-btn .btn-text small {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.7;
+            margin-top: 2px;
+        }
+
+        .sheet-action-btn.download-qr {
+            background: rgba(78, 204, 163, 0.15);
+        }
+        .sheet-action-btn.download-qr .btn-icon {
+            background: #4ecca3;
+        }
+
+        .sheet-action-btn.share-qr {
+            background: rgba(102, 126, 234, 0.15);
+        }
+        .sheet-action-btn.share-qr .btn-icon {
+            background: #667eea;
+        }
+
+        .sheet-action-btn.copy-link {
+            background: rgba(255, 217, 61, 0.15);
+        }
+        .sheet-action-btn.copy-link .btn-icon {
+            background: #ffd93d;
+            color: #000;
+        }
+
+        .sheet-action-btn.share-link {
+            background: rgba(240, 147, 251, 0.15);
+        }
+        .sheet-action-btn.share-link .btn-icon {
+            background: #f093fb;
+        }
+
+        .sheet-action-btn:hover {
+            transform: translateX(5px);
+        }
+
+        .sheet-close-btn {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
             color: #fff;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .sheet-close-btn:hover {
+            background: rgba(255,255,255,0.1);
         }
 
         /* Footer */
@@ -651,19 +678,11 @@
             .products-grid {
                 grid-template-columns: 1fr;
             }
-            .share-btn-group {
-                flex-direction: column;
-                align-items: center;
+            .bottom-sheet {
+                border-radius: 20px 20px 0 0;
             }
-            .share-option-btn {
-                width: 100%;
-                max-width: 280px;
-                justify-content: center;
-                padding: 16px 24px;
-            }
-            .modal {
-                padding: 20px;
-                margin: 15px;
+            .bottom-sheet-content {
+                padding: 10px 20px 25px;
             }
             .footer-content {
                 grid-template-columns: 1fr;
@@ -709,29 +728,41 @@
         <button class="enter-btn" onclick="showCatalog()">🛍️ Products देखें</button>
 
         <div class="share-section">
-            <h3>📲 Catalog Share Karein</h3>
-            <div class="share-btn-group">
-                <button class="share-option-btn qr-share" onclick="openModal('qr')">
-                    <span class="icon">📱</span> QR Code
-                </button>
-                <button class="share-option-btn link-share" onclick="openModal('link')">
-                    <span class="icon">🔗</span> Link Share
-                </button>
-            </div>
+            <button class="share-main-btn" onclick="openBottomSheet()">
+                <span class="pulse-dot"></span>
+                📲 Catalog Share Karein
+            </button>
         </div>
     </div>
 
-    <!-- Share Modal -->
-    <div class="modal-overlay" id="shareModal">
-        <div class="modal">
-            <h3 id="modalTitle">📲 QR Code</h3>
-            <div class="modal-qr">
-                <div id="modalQr"></div>
+    <!-- Bottom Sheet -->
+    <div class="bottom-sheet-overlay" id="sheetOverlay" onclick="closeBottomSheet()"></div>
+    <div class="bottom-sheet" id="bottomSheet">
+        <div class="bottom-sheet-handle"></div>
+        <div class="bottom-sheet-content">
+            <div class="bottom-sheet-title">📲 Share Catalog</div>
+            <div class="bottom-sheet-qr">
+                <div id="sheetQr"></div>
             </div>
-            <div class="modal-actions" id="modalActions">
-                <!-- Actions will be added dynamically -->
+            <div class="bottom-sheet-actions">
+                <button class="sheet-action-btn download-qr" onclick="downloadQR()">
+                    <span class="btn-icon">📥</span>
+                    <span class="btn-text">Download QR<small>Image save karein</small></span>
+                </button>
+                <button class="sheet-action-btn share-qr" onclick="shareQR()">
+                    <span class="btn-icon">📤</span>
+                    <span class="btn-text">Share QR Code<small>WhatsApp, Telegram pe bhejein</small></span>
+                </button>
+                <button class="sheet-action-btn copy-link" onclick="copyLink()">
+                    <span class="btn-icon">📋</span>
+                    <span class="btn-text">Copy Link<small>Link clipboard mein copy karein</small></span>
+                </button>
+                <button class="sheet-action-btn share-link" onclick="shareLink()">
+                    <span class="btn-icon">🔗</span>
+                    <span class="btn-text">Share Link<small>Direct link share karein</small></span>
+                </button>
             </div>
-            <button class="modal-close" onclick="closeModal()">✕</button>
+            <button class="sheet-close-btn" onclick="closeBottomSheet()">✕ Close</button>
         </div>
     </div>
 
@@ -778,7 +809,7 @@
                 </div>
                 <div class="footer-contact-item">
                     <span class="icon">🕐</span>
-                    <span>Mon - Sat: 8:00 AM - 8:00 PM</span>
+                    <span>Mon - Sat: 10:00 AM - 8:00 PM</span>
                 </div>
             </div>
             <div class="footer-col footer-insta">
@@ -893,70 +924,45 @@
 
         const websiteUrl = "https://vijaypatidar10.github.io/Shivam-Traders/";
 
-        // Generate QR Code for Modal
-        function generateModalQR() {
-            const container = document.getElementById("modalQr");
+        // Generate QR Code for Bottom Sheet
+        function generateSheetQR() {
+            const container = document.getElementById("sheetQr");
             container.innerHTML = "";
             new QRCode(container, {
                 text: websiteUrl,
-                width: 180,
-                height: 180,
+                width: 160,
+                height: 160,
                 colorDark: "#1a1a2e",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
             });
         }
 
-        // Open Modal
-        function openModal(type) {
-            const modal = document.getElementById('shareModal');
-            const title = document.getElementById('modalTitle');
-            const actions = document.getElementById('modalActions');
-            
-            generateModalQR();
-            
-            if (type === 'qr') {
-                title.textContent = "📱 QR Code";
-                actions.innerHTML = `
-                    <button class="modal-action-btn download" onclick="downloadQR()">
-                        <span>📥</span> Download QR
-                    </button>
-                    <button class="modal-action-btn share-qr" onclick="shareQR()">
-                        <span>📤</span> Share QR
-                    </button>
-                    <button class="modal-action-btn copy-link" onclick="closeModal()">✕ Close</button>
-                `;
-            } else if (type === 'link') {
-                title.textContent = "🔗 Website Link";
-                actions.innerHTML = `
-                    <button class="modal-action-btn share-link" onclick="shareLink()">
-                        <span>📤</span> Share Link
-                    </button>
-                    <button class="modal-action-btn copy-link" onclick="copyLink()">
-                        <span>📋</span> Copy Link
-                    </button>
-                    <button class="modal-action-btn download" onclick="closeModal()">✕ Close</button>
-                `;
-            }
-            
-            modal.classList.add('active');
+        // Open Bottom Sheet
+        function openBottomSheet() {
+            generateSheetQR();
+            document.getElementById('sheetOverlay').classList.add('active');
+            document.getElementById('bottomSheet').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
-        // Close Modal
-        function closeModal() {
-            document.getElementById('shareModal').classList.remove('active');
+        // Close Bottom Sheet
+        function closeBottomSheet() {
+            document.getElementById('sheetOverlay').classList.remove('active');
+            document.getElementById('bottomSheet').classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
         // Download QR
         function downloadQR() {
-            const qrCanvas = document.querySelector('#modalQr canvas');
+            const qrCanvas = document.querySelector('#sheetQr canvas');
             if (qrCanvas) {
                 const link = document.createElement('a');
                 link.download = 'Shivam-Traders-QR.png';
                 link.href = qrCanvas.toDataURL();
                 link.click();
             } else {
-                const qrImg = document.querySelector('#modalQr img');
+                const qrImg = document.querySelector('#sheetQr img');
                 if (qrImg) {
                     const link = document.createElement('a');
                     link.download = 'Shivam-Traders-QR.png';
@@ -969,7 +975,7 @@
 
         // Share QR
         function shareQR() {
-            const qrCanvas = document.querySelector('#modalQr canvas');
+            const qrCanvas = document.querySelector('#sheetQr canvas');
             if (qrCanvas) {
                 qrCanvas.toBlob(function(blob) {
                     const file = new File([blob], 'Shivam-Traders-QR.png', { type: 'image/png' });
