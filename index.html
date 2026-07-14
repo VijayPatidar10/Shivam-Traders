@@ -377,45 +377,50 @@
         .share-btn-group {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
         .share-option-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 50px;
-            font-size: 0.9rem;
+            gap: 10px;
+            padding: 14px 28px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .share-option-btn.qr-download {
-            background: linear-gradient(135deg, #4ecca3, #38b2ac);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255,255,255,0.05);
             color: #fff;
+            backdrop-filter: blur(5px);
         }
 
         .share-option-btn.qr-share {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: #fff;
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .share-option-btn.qr-share:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
         .share-option-btn.link-share {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            color: #fff;
+            border-color: rgba(240, 147, 251, 0.4);
         }
 
-        .share-option-btn:hover {
+        .share-option-btn.link-share:hover {
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.3), rgba(245, 87, 108, 0.3));
+            border-color: #f093fb;
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
         }
 
         .share-option-btn .icon {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         /* Modal */
@@ -571,8 +576,9 @@
             }
             .share-option-btn {
                 width: 100%;
-                max-width: 250px;
+                max-width: 280px;
                 justify-content: center;
+                padding: 16px 24px;
             }
             .modal {
                 padding: 20px;
