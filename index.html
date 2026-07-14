@@ -321,31 +321,170 @@
             font-weight: 400;
         }
 
-        /* QR Section */
-        .qr-section {
+        /* Share Section */
+        .share-section {
             text-align: center;
-            padding: 30px;
+            padding: 30px 20px;
             background: rgba(255,255,255,0.05);
             border-radius: 15px;
             margin-top: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .qr-section h3 {
+        .share-section h3 {
             color: #e94560;
             margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
-        .qr-section #qrcode {
-            display: inline-block;
+        .share-btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .share-option-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .share-option-btn.qr-download {
+            background: linear-gradient(135deg, #4ecca3, #38b2ac);
+            color: #fff;
+        }
+
+        .share-option-btn.qr-share {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+        }
+
+        .share-option-btn.link-share {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: #fff;
+        }
+
+        .share-option-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .share-option-btn .icon {
+            font-size: 1.2rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 350px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal h3 {
+            color: #e94560;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .modal-qr {
             background: #fff;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 20px;
         }
 
-        .qr-section p {
-            color: #888;
-            font-size: 0.85rem;
-            margin-top: 15px;
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-action-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .modal-action-btn.download {
+            background: linear-gradient(135deg, #4ecca3, #38b2ac);
+            color: #fff;
+        }
+
+        .modal-action-btn.share-qr {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+        }
+
+        .modal-action-btn.share-link {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: #fff;
+        }
+
+        .modal-action-btn.copy-link {
+            background: linear-gradient(135deg, #ffd93d, #ff6b35);
+            color: #fff;
         }
 
         /* Footer */
@@ -390,6 +529,19 @@
             .products-grid {
                 grid-template-columns: 1fr;
             }
+            .share-btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            .share-option-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+            .modal {
+                padding: 20px;
+                margin: 15px;
+            }
         }
     </style>
 </head>
@@ -421,10 +573,33 @@
         <div class="location">📍 Akodiya Road, Mandi Ke Paas, Sarangpur</div>
         <button class="enter-btn" onclick="showCatalog()">🛍️ Products देखें</button>
 
-        <div class="qr-section">
-            <h3>Scan QR Code</h3>
-            <div id="qrcode"></div>
-            <p>QR scan karein aur catalog dekhein</p>
+        <div class="share-section">
+            <h3>📲 Catalog Share Karein</h3>
+            <div class="share-btn-group">
+                <button class="share-option-btn qr-download" onclick="openModal('download')">
+                    <span class="icon">⬇️</span> QR Download
+                </button>
+                <button class="share-option-btn qr-share" onclick="openModal('share')">
+                    <span class="icon">📤</span> QR Share
+                </button>
+                <button class="share-option-btn link-share" onclick="openModal('link')">
+                    <span class="icon">🔗</span> Link Share
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal-overlay" id="shareModal">
+        <div class="modal">
+            <h3 id="modalTitle">📲 QR Code</h3>
+            <div class="modal-qr">
+                <div id="modalQr"></div>
+            </div>
+            <div class="modal-actions" id="modalActions">
+                <!-- Actions will be added dynamically -->
+            </div>
+            <button class="modal-close" onclick="closeModal()">✕</button>
         </div>
     </div>
 
@@ -548,16 +723,123 @@
             }
         ];
 
-        // Generate QR Code
-        function generateQR() {
-            const url = "https://vijaypatidar10.github.io/Shivam-Traders/";
-            new QRCode(document.getElementById("qrcode"), {
-                text: url,
-                width: 200,
-                height: 200,
+        const websiteUrl = "https://vijaypatidar10.github.io/Shivam-Traders/";
+
+        // Generate QR Code for Modal
+        function generateModalQR() {
+            const container = document.getElementById("modalQr");
+            container.innerHTML = "";
+            new QRCode(container, {
+                text: websiteUrl,
+                width: 180,
+                height: 180,
                 colorDark: "#1a1a2e",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        // Open Modal
+        function openModal(type) {
+            const modal = document.getElementById('shareModal');
+            const title = document.getElementById('modalTitle');
+            const actions = document.getElementById('modalActions');
+            
+            generateModalQR();
+            
+            if (type === 'download') {
+                title.textContent = "⬇️ QR Code Download";
+                actions.innerHTML = `
+                    <button class="modal-action-btn download" onclick="downloadQR()">
+                        <span>📥</span> Download QR Image
+                    </button>
+                    <button class="modal-action-btn copy-link" onclick="closeModal()">✕ Close</button>
+                `;
+            } else if (type === 'share') {
+                title.textContent = "📤 QR Code Share";
+                actions.innerHTML = `
+                    <button class="modal-action-btn share-qr" onclick="shareQR()">
+                        <span>📤</span> Share QR Code
+                    </button>
+                    <button class="modal-action-btn copy-link" onclick="closeModal()">✕ Close</button>
+                `;
+            } else if (type === 'link') {
+                title.textContent = "🔗 Website Link Share";
+                actions.innerHTML = `
+                    <button class="modal-action-btn share-link" onclick="shareLink()">
+                        <span>📤</span> Share Link
+                    </button>
+                    <button class="modal-action-btn copy-link" onclick="copyLink()">
+                        <span>📋</span> Copy Link
+                    </button>
+                    <button class="modal-action-btn download" onclick="closeModal()">✕ Close</button>
+                `;
+            }
+            
+            modal.classList.add('active');
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('shareModal').classList.remove('active');
+        }
+
+        // Download QR
+        function downloadQR() {
+            const qrCanvas = document.querySelector('#modalQr canvas');
+            if (qrCanvas) {
+                const link = document.createElement('a');
+                link.download = 'Shivam-Traders-QR.png';
+                link.href = qrCanvas.toDataURL();
+                link.click();
+            } else {
+                const qrImg = document.querySelector('#modalQr img');
+                if (qrImg) {
+                    const link = document.createElement('a');
+                    link.download = 'Shivam-Traders-QR.png';
+                    link.href = qrImg.src;
+                    link.click();
+                }
+            }
+            alert('✅ QR Code download ho gaya!');
+        }
+
+        // Share QR
+        function shareQR() {
+            const qrCanvas = document.querySelector('#modalQr canvas');
+            if (qrCanvas) {
+                qrCanvas.toBlob(function(blob) {
+                    const file = new File([blob], 'Shivam-Traders-QR.png', { type: 'image/png' });
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Shivam Traders',
+                            text: 'Shivam Traders ka catalog dekhein!',
+                            files: [file]
+                        });
+                    } else {
+                        alert('📤 Share karna hai toh QR download karke bhejo!');
+                    }
+                });
+            }
+        }
+
+        // Share Link
+        function shareLink() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Shivam Traders, Sarangpur',
+                    text: '🛍️ Shivam Traders ka catalog dekhein - Water Tanks, Taps, Basins aur bahut kuch!',
+                    url: websiteUrl
+                });
+            } else {
+                copyLink();
+            }
+        }
+
+        // Copy Link
+        function copyLink() {
+            navigator.clipboard.writeText(websiteUrl).then(() => {
+                alert('✅ Link copy ho gaya! Ab kahi bhi paste karo.');
             });
         }
 
@@ -625,7 +907,7 @@
 
         // Initialize
         window.onload = function() {
-            generateQR();
+            // QR will be generated when modal opens
         };
     </script>
 </body>
