@@ -530,11 +530,92 @@
 
         /* Footer */
         .footer {
+            background: rgba(0,0,0,0.3);
+            margin-top: 40px;
+            padding: 40px 20px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-col h4 {
+            color: #e94560;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col p {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-col a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            line-height: 2;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: #e94560;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .footer-contact-item .icon {
+            font-size: 1.1rem;
+        }
+
+        .footer-insta {
             text-align: center;
-            padding: 20px;
+        }
+
+        .footer-insta .insta-qr {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.1);
+            object-fit: cover;
+            margin-bottom: 10px;
+            transition: transform 0.3s;
+        }
+
+        .footer-insta .insta-qr:hover {
+            transform: scale(1.05);
+        }
+
+        .footer-insta p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
             color: #666;
             font-size: 0.8rem;
-            margin-top: 30px;
         }
 
         /* Scrollbar */
@@ -583,6 +664,18 @@
             .modal {
                 padding: 20px;
                 margin: 15px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 25px;
+            }
+            .footer-contact-item {
+                justify-content: center;
+            }
+            .footer-insta .insta-qr {
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
@@ -660,7 +753,43 @@
     </div>
 
     <div class="footer">
-        © 2026 Shivam Traders, Sarangpur | All Rights Reserved
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Shivam Traders</h4>
+                <p>Sarangpur ka bharosemand hardware shop. Water tanks, taps, basins, sinks aur pipes ki sabse achi quality aur sasti keemat.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <a href="#">🚰 Taps & Faucets</a>
+                <a href="#">🚻 Wash Basins</a>
+                <a href="#">🛢️ Water Tanks</a>
+                <a href="#">🍽️ Kitchen Sinks</a>
+                <a href="#">🔧 Pipes & Fittings</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <div class="footer-contact-item">
+                    <span class="icon">📞</span>
+                    <a href="tel:+918269516169">+91 82695 16169</a>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="icon">📍</span>
+                    <span>Akodiya Road, Mandi Ke Paas, Sarangpur</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="icon">🕐</span>
+                    <span>Mon - Sat: 8:00 AM - 8:00 PM</span>
+                </div>
+            </div>
+            <div class="footer-col footer-insta">
+                <h4>Follow Us</h4>
+                <img src="Insta.jpeg" alt="Instagram QR" class="insta-qr" onclick="window.open('Insta.jpeg')">
+                <p>Scan for Instagram</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Shivam Traders, Sarangpur | All Rights Reserved
+        </div>
     </div>
 
     <script>
