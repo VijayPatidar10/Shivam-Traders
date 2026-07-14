@@ -612,11 +612,8 @@
         <div class="share-section">
             <h3>📲 Catalog Share Karein</h3>
             <div class="share-btn-group">
-                <button class="share-option-btn qr-download" onclick="openModal('download')">
-                    <span class="icon">⬇️</span> QR Download
-                </button>
-                <button class="share-option-btn qr-share" onclick="openModal('share')">
-                    <span class="icon">📤</span> QR Share
+                <button class="share-option-btn qr-share" onclick="openModal('qr')">
+                    <span class="icon">📱</span> QR Code
                 </button>
                 <button class="share-option-btn link-share" onclick="openModal('link')">
                     <span class="icon">🔗</span> Link Share
@@ -783,24 +780,19 @@
             
             generateModalQR();
             
-            if (type === 'download') {
-                title.textContent = "⬇️ QR Code Download";
+            if (type === 'qr') {
+                title.textContent = "📱 QR Code";
                 actions.innerHTML = `
                     <button class="modal-action-btn download" onclick="downloadQR()">
-                        <span>📥</span> Download QR Image
+                        <span>📥</span> Download QR
                     </button>
-                    <button class="modal-action-btn copy-link" onclick="closeModal()">✕ Close</button>
-                `;
-            } else if (type === 'share') {
-                title.textContent = "📤 QR Code Share";
-                actions.innerHTML = `
                     <button class="modal-action-btn share-qr" onclick="shareQR()">
-                        <span>📤</span> Share QR Code
+                        <span>📤</span> Share QR
                     </button>
                     <button class="modal-action-btn copy-link" onclick="closeModal()">✕ Close</button>
                 `;
             } else if (type === 'link') {
-                title.textContent = "🔗 Website Link Share";
+                title.textContent = "🔗 Website Link";
                 actions.innerHTML = `
                     <button class="modal-action-btn share-link" onclick="shareLink()">
                         <span>📤</span> Share Link
